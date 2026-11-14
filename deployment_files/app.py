@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+# Define the file paths to save (serialize) the trained regression model
+saved_model_path = "deployment_files/boston_housing_model_v1_0.joblib"
+
+
 # Load the trained regression model
 def load_model():
     return joblib.load("boston_housing_model_v1_0.joblib")
