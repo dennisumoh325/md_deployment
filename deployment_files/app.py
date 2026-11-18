@@ -1,14 +1,24 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from pathlib import Path
 
 # Define the file paths to save (serialize) the trained regression model
 saved_model_path = "deployment_files/boston_housing_model_v1_0.joblib"
 
 
 # Load the trained regression model
+@st.cache_resource
 def load_model():
-    return joblib.load("boston_housing_model_v1_0.joblib")
+    # Resolves the folder where this Python script lives
+    base_dir = Path(__file__).resolve().parent
+    
+    # Adjust if your model is inside a subfolder (e.g., base_dir / "models" / "model.joblib")
+    model_path = base_dir / "boston_housing_model_v1_0.joblib"
+    
+    return joblib.load(model_path)
+
+
 
 model = load_model()
 
